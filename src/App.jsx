@@ -19,10 +19,17 @@ function App({ todos }) {
     todos.splice(index, 1);
   };
   return (
-    <>
+    <div>
       <ul>
         {todos.map((todo) => (
-          <Todo key={todo.id} text={todo.text} completed={todo.completed} />
+          <li key={todo.id}>
+            <Todo
+              text={todo.text}
+              completed={todo.completed}
+              onClick={() => handleDeleteTodo()}
+            />
+            <button onClick={handleDeleteTodo}>Delete</button>
+          </li>
         ))}
       </ul>
 
@@ -32,10 +39,9 @@ function App({ todos }) {
         placeholder="Nouvelle tache"
         onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button onClick={handleAddTodo}></button>
-      <button onClick={handleDeleteTodo}></button>
-      <button onClick={handleMarkAsDone}></button>
-    </>
+      <button onClick={handleAddTodo}>Add</button>
+      <button onClick={handleMarkAsDone}>Done</button>
+    </div>
   );
 }
 
