@@ -9,7 +9,15 @@ function App({ todos }) {
     todos.push({ text: newTodo, completed: false });
     setNewTodo("");
   };
+  const handleMarkAsDone = (id) => {
+    const todo = todos.find((todo) => todo.id === id);
+    todo.completed = true;
+  };
 
+  const handleDeleteTodo = (id) => {
+    const index = todos.findIndex((todo) => todo.id === id);
+    todos.splice(index, 1);
+  };
   return (
     <>
       <ul>
@@ -25,6 +33,8 @@ function App({ todos }) {
         onChange={(e) => setNewTodo(e.target.value)}
       />
       <button onClick={handleAddTodo}></button>
+      <button onClick={handleDeleteTodo}></button>
+      <button onClick={handleMarkAsDone}></button>
     </>
   );
 }
