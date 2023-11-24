@@ -1,9 +1,12 @@
-import React from "react";
-
-function Todo({ text, completed }) {
-  const style = {
-    textDecoration: completed ? "line-through" : "",
-  };
-  return <li style={style}>{text}</li>;
-}
-export default Todo;
+export const todos = [
+  {
+    id: 0,
+    text: "corrosol",
+    completed: false,
+  },
+  {
+    id: 1,
+    text: "banana",
+    completed: true,
+  },
+];

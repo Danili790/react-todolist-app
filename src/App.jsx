@@ -1,36 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState } from "react";
+import { todos } from "./todo.jsx";
 
-import Todo from "./Todo";
+const apps = todos;
 
-function App({ todos }) {
+function App({}) {
   const [newTodo, setNewTodo] = useState("");
-
   const handleAddTodo = () => {
-    todos.push({ text: newTodo, completed: false });
+    apps.push({ id, text: newTodo, completed: false });
     setNewTodo("");
   };
   const handleMarkAsDone = (id) => {
-    const todo = todos.find((todo) => todo.id === id);
+    const todo = apps.filter((todo) => todo.id === id);
     todo.completed = true;
   };
 
   const handleDeleteTodo = (id) => {
-    const index = todos.findIndex((todo) => todo.id === id);
-    todos.splice(index, 1);
+    const index = apps.filter((todo) => todo.id === id);
+    apps.splice(index, 1);
   };
+  // const DeleteButton = ({ id }) => {
+  //   return <button onClick={() => handleDeleteTodo(id)}>Delete</button>;
+  // };
   return (
     <div>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <Todo
-              text={todo.text}
-              completed={todo.completed}
-              onClick={() => handleDeleteTodo()}
-            />
-            <button onClick={handleDeleteTodo}>Delete</button>
-          </li>
-        ))}
+        {apps.map((todo) => {
+          <li key={todo.id} userId={todo.id} onClick={handleMarkAsDone()}>
+            <button key={todo.id} onClick={() => handleDeleteTodo()}>
+              Delete
+            </button>
+          </li>;
+        })}
       </ul>
 
       <input
@@ -39,8 +40,7 @@ function App({ todos }) {
         placeholder="Nouvelle tache"
         onChange={(e) => setNewTodo(e.target.value)}
       />
-      <button onClick={handleAddTodo}>Add</button>
-      <button onClick={handleMarkAsDone}>Done</button>
+      <button onClick={handleAddTodo()}></button>
     </div>
   );
 }
